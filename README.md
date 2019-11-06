@@ -41,6 +41,8 @@ The project depends on `docker-compose` to orchestrate the containers.
 - The timestamp stored in Postgres per metric _should_ reflect the time of sampling, but figuring out the proper mapping between Python and Postgres data types felt like it wasn't worth wasting time on for the purposes of the exercise. As is, the timestamp reflects the time of insert instead.
 - General cleanup is needed (obsolete dependencies in requirements.txt, better logging with timestamps)
 - Health checks do not provide HTTP endpoint.
+- The OS metrics chosen do not reflect real production needs. The collector only samples cpu, memory and disk utilization metrics.
+- Service initialization is inconsistent for the collector and sink. One is configured with CLI flags, the other directly with envvars. Ideally I would have fixed that.
 
 
 
