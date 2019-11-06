@@ -1,0 +1,28 @@
+version: "2.3"
+services:
+    sink:
+        build:
+            context: ./sink/
+            dockerfile: Dockerfile
+        env_file:
+            ./sink/.env
+        volumes:
+            ["./sink:/sink"]
+        healthcheck:
+            test: bash ./scripts/healthcheck.sh || exit 1
+            interval: 5s
+            timeout: 10s
+            retries: 3
+    collector:
+        build:
+            context: ./collector/
+            dockerfile: Dockerfile
+        env_file:
+            ./collector/.env
+        volumes:
+            ["./collector:/collector"]
+        healthcheck:
+            test: bash ./scripts/healthcheck.sh || exit 1
+            interval: 5s
+            timeout: 10s
+            retries: 3
